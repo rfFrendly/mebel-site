@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Магазин мебели</title>
+
+    <!-- Скрипт Telegram Mini Apps -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script> <!-- важно -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+    <h2>Мебельный магазин</h2>
+
+    <div class="catalog">
+        <div class="item" data-id="1" data-name="Диван угловой" data-price="15000">
+            <h3>Диван угловой</h3>
+            <p>2.5 м, ткань</p>
+            <span>15 000 ₽</span>
+            <button class="add-btn">В корзину</button>
+        </div>
+
+        <div class="item" data-id="2" data-name="Стол обеденный" data-price="8000">
+            <h3>Стол обеденный</h3>
+            <p>120×80, дуб</p>
+            <span>8 000 ₽</span>
+            <button class="add-btn">В корзину</button>
+        </div>
+    </div>
+
+    <div class="cart">
+        Товаров в корзине: <span id="cart-count">0</span><br>
+        На сумму: <span id="cart-total">0</span> ₽
+    </div>
+
+    <button id="checkout-btn">Оформить заказ</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
