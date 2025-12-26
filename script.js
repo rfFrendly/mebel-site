@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  /* ---------- КОЛИЧЕСТВО ---------- */
+  /* ---------- КОЛИЧЕСТВО ДОБАВЛЕНИЯ ---------- */
   const qtyModal = document.getElementById("qty-modal");
   const qtyValueEl = document.getElementById("qty-value");
 
@@ -88,18 +88,72 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function renderCartModal() {
     if (!cart.length) {
-      cartItemsEl.innerHTML = "<p>Корзина пуста</p>";
+      cartItemsEl.innerHTML = `<p class="cart-empty">Корзина пуста</p>`;
     } else {
       cartItemsEl.innerHTML = cart
         .map(
-          (i) =>
-            `<div>${i.name} × ${i.qty} — ${i.qty * i.price} ₽</div>`
+          (i, idx) => `
+          <div class="cart-row" data-index="${idx}">
+            <div class="cart-row-main">
+              <div class="cart-row-name">${i.name}</div>
+              <div class="cart-row-price">${i.price} ₽ за шт.</div>
+            </div>
+            <div class="cart-row-controls">
+              <button class="cart-qty-btn cart-qty-minus">−</button>
+              <span class="cart-qty-value">${i.qty}</span>
+              <button class="cart-qty-btn cart-qty-plus">+</button>
+              <div class="cart-row-total">${i.qty * i.price} ₽</div>
+              <button class="cart-remove-btn">×</button>
+            </div>
+          </div>
+        `
         )
         .join("");
     }
 
     const total = cart.reduce((s, i) => s + i.qty * i.price, 0);
     document.getElementById("cart-total-modal").textContent = total;
+
+    // Вешаем обработчики на +/- и удаление
+    cartItemsEl.querySelectorAll(".cart-row").forEach((row) => {
+      const index = Number(row.dataset.index);
+
+      const minusBtn = row.querySelector(".cart-qty-minus");
+      const plusBtn = row.querySelector(".cart-qty-plus");
+      const removeBtn = row.querySelector(".cart-remove-btn");
+      const qtyEl = row.querySelector(".cart-qty-value");
+      const rowTotalEl = row.querySelector(".cart-row-total");
+
+      minusBtn.onclick = () => {
+        const item = cart[index];
+        if (!item) return;
+        if (item.qty > 1) {
+          item.qty -= 1;
+        } else {
+          // если было 1 — удаляем позицию
+          cart.splice(index, 1);
+        }
+        updateCartViews();
+        renderCartModal();
+      };
+
+      plusBtn.onclick = () => {
+        const item = cart[index];
+        if (!item) return;
+        item.qty += 1;
+        qtyEl.textContent = item.qty;
+        rowTotalEl.textContent = `${item.qty * item.price} ₽`;
+        const newTotal = cart.reduce((s, i) => s + i.qty * i.price, 0);
+        document.getElementById("cart-total-modal").textContent = newTotal;
+        updateCartViews();
+      };
+
+      removeBtn.onclick = () => {
+        cart.splice(index, 1);
+        updateCartViews();
+        renderCartModal();
+      };
+    });
   }
 
   document.getElementById("cart-checkout").onclick = () => {
