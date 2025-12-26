@@ -2,9 +2,8 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Магазин мебели</title>
+    <title>Мебельный магазин</title>
 
-    <!-- Скрипт Telegram Mini Apps -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -20,11 +19,12 @@
 
     <div class="catalog">
 
-        <!-- ТОВАР 1 (у тебя уже был) -->
+        <!-- ТОВАР 1 -->
         <div class="item"
              data-id="1"
              data-name="Напольная тумба узкая, шкаф пенал"
              data-price="1589"
+             data-desc="Узкий напольный шкаф‑пенал, идеален для небольших помещений"
              data-images='[
                 "https://basket-10.wbbasket.ru/vol1524/part152456/152456703/images/big/1.webp",
                 "https://basket-10.wbbasket.ru/vol1524/part152456/152456703/images/big/3.webp"
@@ -61,6 +61,7 @@
              data-id="2"
              data-name="Напольная тумба узкая, шкаф пенал"
              data-price="2484"
+             data-desc="Узкий напольный шкаф‑пенал, вариант №2"
              data-images='[
                 "https://basket-33.wbbasket.ru/vol7021/part702184/702184594/images/big/1.webp",
                 "https://basket-33.wbbasket.ru/vol7021/part702184/702184594/images/big/2.webp"
@@ -97,6 +98,7 @@
              data-id="3"
              data-name="Напольная тумба узкая, шкаф пенал"
              data-price="2998"
+             data-desc="Узкий напольный шкаф‑пенал, вариант №3"
              data-images='[
                 "https://basket-34.wbbasket.ru/vol7164/part716491/716491668/images/big/1.webp",
                 "https://basket-34.wbbasket.ru/vol7164/part716491/716491668/images/big/2.webp"
@@ -133,6 +135,7 @@
              data-id="4"
              data-name="Напольный шкаф пенал узкий"
              data-price="4771"
+             data-desc="Узкий пенал, три варианта ракурсов"
              data-images='[
                 "https://basket-22.wbbasket.ru/vol3718/part371806/371806919/images/big/1.webp",
                 "https://basket-22.wbbasket.ru/vol3718/part371806/371806919/images/big/2.webp",
@@ -176,6 +179,7 @@
              data-id="5"
              data-name="Напольный шкаф пенал узкий"
              data-price="4713"
+             data-desc="Узкий пенал, модель №2"
              data-images='[
                 "https://basket-22.wbbasket.ru/vol3736/part373616/373616283/images/big/1.webp",
                 "https://basket-22.wbbasket.ru/vol3736/part373616/373616283/images/big/2.webp",
@@ -261,6 +265,34 @@
         <div class="modal-actions">
             <button class="modal-btn secondary" id="cart-close">Закрыть</button>
             <button class="modal-btn primary" id="cart-checkout">Оформить</button>
+        </div>
+    </div>
+</div>
+
+<!-- Модалка данных доставки -->
+<div class="cart-modal" id="shipping-modal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+        <h3 class="modal-title">Данные доставки</h3>
+
+        <div class="form-field">
+            <label for="ship-name">Имя</label>
+            <input id="ship-name" type="text" placeholder="Как к вам обращаться">
+        </div>
+
+        <div class="form-field">
+            <label for="ship-phone">Телефон</label>
+            <input id="ship-phone" type="tel" placeholder="+7...">
+        </div>
+
+        <div class="form-field">
+            <label for="ship-address">Адрес доставки</label>
+            <textarea id="ship-address" rows="3" placeholder="Город, улица, дом, подъезд..."></textarea>
+        </div>
+
+        <div class="modal-actions">
+            <button class="modal-btn secondary" id="ship-cancel">Отмена</button>
+            <button class="modal-btn primary" id="ship-ok">Далее к оплате</button>
         </div>
     </div>
 </div>
