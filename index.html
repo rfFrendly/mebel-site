@@ -1,302 +1,327 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>Магазин мебели</title>
-
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Мебельный магазин</title>
+  <!-- Telegram Mini Apps -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<div class="app">
-
+  <div class="app">
     <div class="header">
-        <h2>Мебельный магазин</h2>
-        <button class="cart-icon" id="open-cart">
-            🛒 <span id="cart-top-count">0</span>
-        </button>
+      <h2>Мебельный магазин</h2>
+      <button class="cart-icon" id="open-cart">
+        🛒 <span id="cart-top-count">0</span>
+      </button>
     </div>
 
     <div class="catalog">
+      <!-- Товар 1 -->
+      <div
+        class="item"
+        data-id="1"
+        data-name="Напольная тумба узкая, шкаф пенал"
+        data-price="1589"
+        data-desc="Узкий напольный шкаф‑пенал, идеален для небольших помещений"
+        data-images='[
+          "https://basket-10.wbbasket.ru/vol1524/part152456/152456703/images/big/1.webp",
+          "https://basket-10.wbbasket.ru/vol1524/part152456/152456703/images/big/3.webp"
+        ]'
+      >
+        <div class="item-gallery">
+          <img
+            src="https://basket-10.wbbasket.ru/vol1524/part152456/152456703/images/big/1.webp"
+            alt="Напольная тумба узкая, шкаф пенал"
+            class="item-img active js-open-lightbox"
+          />
+          <img
+            src="https://basket-10.wbbasket.ru/vol1524/part152456/152456703/images/big/3.webp"
+            alt="Напольная тумба узкая, шкаф пенал — ракурс 2"
+            class="item-img js-open-lightbox"
+          />
 
-        <!-- ТОВАР 1 -->
-        <div class="item"
-             data-id="1"
-             data-name="Напольная тумба узкая, шкаф пенал"
-             data-price="1589"
-             data-desc="Узкий напольный шкаф‑пенал, идеален для небольших помещений"
-             data-images='[
-                "https://basket-10.wbbasket.ru/vol1524/part152456/152456703/images/big/1.webp",
-                "https://basket-10.wbbasket.ru/vol1524/part152456/152456703/images/big/3.webp"
-             ]'>
-
-            <div class="item-gallery">
-                <img src="https://basket-10.wbbasket.ru/vol1524/part152456/152456703/images/big/1.webp"
-                     alt="Напольная тумба узкая, шкаф пенал"
-                     class="item-img active js-open-lightbox">
-                <img src="https://basket-10.wbbasket.ru/vol1524/part152456/152456703/images/big/3.webp"
-                     alt="Напольная тумба узкая, шкаф пенал вид 2"
-                     class="item-img js-open-lightbox">
-
-                <div class="thumbs">
-                    <img src="https://basket-10.wbbasket.ru/vol1524/part152456/152456703/images/big/1.webp"
-                         alt=""
-                         class="thumb thumb-active">
-                    <img src="https://basket-10.wbbasket.ru/vol1524/part152456/152456703/images/big/3.webp"
-                         alt=""
-                         class="thumb">
-                </div>
-            </div>
-
-            <div class="item-content">
-                <h3>Напольная тумба узкая, шкаф пенал</h3>
-                <p>Узкий напольный шкаф‑пенал, идеален для небольших помещений</p>
-                <span class="price">1 589 ₽</span>
-                <button class="add-btn">В корзину</button>
-            </div>
+          <div class="thumbs">
+            <img
+              src="https://basket-10.wbbasket.ru/vol1524/part152456/152456703/images/big/1.webp"
+              alt="Напольная тумба узкая, шкаф пенал"
+              class="thumb thumb-active"
+            />
+            <img
+              src="https://basket-10.wbbasket.ru/vol1524/part152456/152456703/images/big/3.webp"
+              alt="Напольная тумба узкая, шкаф пенал — ракурс 2"
+              class="thumb"
+            />
+          </div>
         </div>
 
-        <!-- ТОВАР 2 -->
-        <div class="item"
-             data-id="2"
-             data-name="Напольная тумба узкая, шкаф пенал"
-             data-price="2484"
-             data-desc="Узкий напольный шкаф‑пенал, вариант №2"
-             data-images='[
-                "https://basket-33.wbbasket.ru/vol7021/part702184/702184594/images/big/1.webp",
-                "https://basket-33.wbbasket.ru/vol7021/part702184/702184594/images/big/2.webp"
-             ]'>
+        <div class="item-content">
+          <h3>Напольная тумба узкая, шкаф пенал</h3>
+          <p>Узкий напольный шкаф‑пенал, идеален для небольших помещений.</p>
+          <span class="price">1 589 ₽</span>
+          <button class="add-btn">В корзину</button>
+        </div>
+      </div>
 
-            <div class="item-gallery">
-                <img src="https://basket-33.wbbasket.ru/vol7021/part702184/702184594/images/big/1.webp"
-                     alt="Напольная тумба узкая, шкаф пенал"
-                     class="item-img active js-open-lightbox">
-                <img src="https://basket-33.wbbasket.ru/vol7021/part702184/702184594/images/big/2.webp"
-                     alt="Напольная тумба узкая, шкаф пенал"
-                     class="item-img js-open-lightbox">
+      <!-- Товар 2 -->
+      <div
+        class="item"
+        data-id="2"
+        data-name="Напольная тумба узкая, шкаф пенал №2"
+        data-price="2484"
+        data-desc="Узкий напольный шкаф‑пенал, вариант №2"
+        data-images='[
+          "https://basket-33.wbbasket.ru/vol7021/part702184/702184594/images/big/1.webp",
+          "https://basket-33.wbbasket.ru/vol7021/part702184/702184594/images/big/2.webp"
+        ]'
+      >
+        <div class="item-gallery">
+          <img
+            src="https://basket-33.wbbasket.ru/vol7021/part702184/702184594/images/big/1.webp"
+            alt="Напольная тумба узкая, шкаф пенал №2"
+            class="item-img active js-open-lightbox"
+          />
+          <img
+            src="https://basket-33.wbbasket.ru/vol7021/part702184/702184594/images/big/2.webp"
+            alt="Напольная тумба узкая, шкаф пенал №2 — ракурс 2"
+            class="item-img js-open-lightbox"
+          />
 
-                <div class="thumbs">
-                    <img src="https://basket-33.wbbasket.ru/vol7021/part702184/702184594/images/big/1.webp"
-                         alt=""
-                         class="thumb thumb-active">
-                    <img src="https://basket-33.wbbasket.ru/vol7021/part702184/702184594/images/big/2.webp"
-                         alt=""
-                         class="thumb">
-                </div>
-            </div>
-
-            <div class="item-content">
-                <h3>Напольная тумба узкая, шкаф пенал</h3>
-                <p>Узкий напольный шкаф‑пенал, вариант №2</p>
-                <span class="price">2 484 ₽</span>
-                <button class="add-btn">В корзину</button>
-            </div>
+          <div class="thumbs">
+            <img
+              src="https://basket-33.wbbasket.ru/vol7021/part702184/702184594/images/big/1.webp"
+              alt="Напольная тумба узкая, шкаф пенал №2"
+              class="thumb thumb-active"
+            />
+            <img
+              src="https://basket-33.wbbasket.ru/vol7021/part702184/702184594/images/big/2.webp"
+              alt="Напольная тумба узкая, шкаф пенал №2 — ракурс 2"
+              class="thumb"
+            />
+          </div>
         </div>
 
-        <!-- ТОВАР 3 -->
-        <div class="item"
-             data-id="3"
-             data-name="Напольная тумба узкая, шкаф пенал"
-             data-price="2998"
-             data-desc="Узкий напольный шкаф‑пенал, вариант №3"
-             data-images='[
-                "https://basket-34.wbbasket.ru/vol7164/part716491/716491668/images/big/1.webp",
-                "https://basket-34.wbbasket.ru/vol7164/part716491/716491668/images/big/2.webp"
-             ]'>
+        <div class="item-content">
+          <h3>Напольная тумба узкая, шкаф пенал №2</h3>
+          <p>Узкий напольный шкаф‑пенал, вариант №2.</p>
+          <span class="price">2 484 ₽</span>
+          <button class="add-btn">В корзину</button>
+        </div>
+      </div>
 
-            <div class="item-gallery">
-                <img src="https://basket-34.wbbasket.ru/vol7164/part716491/716491668/images/big/1.webp"
-                     alt="Напольная тумба узкая, шкаф пенал"
-                     class="item-img active js-open-lightbox">
-                <img src="https://basket-34.wbbasket.ru/vol7164/part716491/716491668/images/big/2.webp"
-                     alt="Напольная тумба узкая, шкаф пенал"
-                     class="item-img js-open-lightbox">
+      <!-- Товар 3 -->
+      <div
+        class="item"
+        data-id="3"
+        data-name="Напольная тумба узкая, шкаф пенал №3"
+        data-price="2998"
+        data-desc="Узкий напольный шкаф‑пенал, вариант №3"
+        data-images='[
+          "https://basket-34.wbbasket.ru/vol7164/part716491/716491668/images/big/1.webp",
+          "https://basket-34.wbbasket.ru/vol7164/part716491/716491668/images/big/2.webp"
+        ]'
+      >
+        <div class="item-gallery">
+          <img
+            src="https://basket-34.wbbasket.ru/vol7164/part716491/716491668/images/big/1.webp"
+            alt="Напольная тумба узкая, шкаф пенал №3"
+            class="item-img active js-open-lightbox"
+          />
+          <img
+            src="https://basket-34.wbbasket.ru/vol7164/part716491/716491668/images/big/2.webp"
+            alt="Напольная тумба узкая, шкаф пенал №3 — ракурс 2"
+            class="item-img js-open-lightbox"
+          />
 
-                <div class="thumbs">
-                    <img src="https://basket-34.wbbasket.ru/vol7164/part716491/716491668/images/big/1.webp"
-                         alt=""
-                         class="thumb thumb-active">
-                    <img src="https://basket-34.wbbasket.ru/vol7164/part716491/716491668/images/big/2.webp"
-                         alt=""
-                         class="thumb">
-                </div>
-            </div>
-
-            <div class="item-content">
-                <h3>Напольная тумба узкая, шкаф пенал</h3>
-                <p>Узкий напольный шкаф‑пенал, вариант №3</p>
-                <span class="price">2 998 ₽</span>
-                <button class="add-btn">В корзину</button>
-            </div>
+          <div class="thumbs">
+            <img
+              src="https://basket-34.wbbasket.ru/vol7164/part716491/716491668/images/big/1.webp"
+              alt="Напольная тумба узкая, шкаф пенал №3"
+              class="thumb thumb-active"
+            />
+            <img
+              src="https://basket-34.wbbasket.ru/vol7164/part716491/716491668/images/big/2.webp"
+              alt="Напольная тумба узкая, шкаф пенал №3 — ракурс 2"
+              class="thumb"
+            />
+          </div>
         </div>
 
-        <!-- ТОВАР 4 -->
-        <div class="item"
-             data-id="4"
-             data-name="Напольный шкаф пенал узкий"
-             data-price="4771"
-             data-desc="Узкий пенал, три варианта ракурсов"
-             data-images='[
-                "https://basket-22.wbbasket.ru/vol3718/part371806/371806919/images/big/1.webp",
-                "https://basket-22.wbbasket.ru/vol3718/part371806/371806919/images/big/2.webp",
-                "https://basket-22.wbbasket.ru/vol3718/part371806/371806919/images/big/3.webp"
-             ]'>
+        <div class="item-content">
+          <h3>Напольная тумба узкая, шкаф пенал №3</h3>
+          <p>Узкий напольный шкаф‑пенал, вариант №3.</p>
+          <span class="price">2 998 ₽</span>
+          <button class="add-btn">В корзину</button>
+        </div>
+      </div>
 
-            <div class="item-gallery">
-                <img src="https://basket-22.wbbasket.ru/vol3718/part371806/371806919/images/big/1.webp"
-                     alt="Напольный шкаф пенал узкий"
-                     class="item-img active js-open-lightbox">
-                <img src="https://basket-22.wbbasket.ru/vol3718/part371806/371806919/images/big/2.webp"
-                     alt="Напольный шкаф пенал узкий"
-                     class="item-img js-open-lightbox">
-                <img src="https://basket-22.wbbasket.ru/vol3718/part371806/371806919/images/big/3.webp"
-                     alt="Напольный шкаф пенал узкий"
-                     class="item-img js-open-lightbox">
+      <!-- Товар 4 -->
+      <div
+        class="item"
+        data-id="4"
+        data-name="Узкий пенал, три ракурса"
+        data-price="4771"
+        data-desc="Узкий пенал, три варианта ракурсов"
+        data-images='[
+          "https://basket-22.wbbasket.ru/vol3718/part371806/371806919/images/big/1.webp",
+          "https://basket-22.wbbasket.ru/vol3718/part371806/371806919/images/big/2.webp",
+          "https://basket-22.wbbasket.ru/vol3718/part371806/371806919/images/big/3.webp"
+        ]'
+      >
+        <div class="item-gallery">
+          <img
+            src="https://basket-22.wbbasket.ru/vol3718/part371806/371806919/images/big/1.webp"
+            alt="Узкий пенал, три ракурса"
+            class="item-img active js-open-lightbox"
+          />
+          <img
+            src="https://basket-22.wbbasket.ru/vol3718/part371806/371806919/images/big/2.webp"
+            alt="Узкий пенал, ракурс 2"
+            class="item-img js-open-lightbox"
+          />
+          <img
+            src="https://basket-22.wbbasket.ru/vol3718/part371806/371806919/images/big/3.webp"
+            alt="Узкий пенал, ракурс 3"
+            class="item-img js-open-lightbox"
+          />
 
-                <div class="thumbs">
-                    <img src="https://basket-22.wbbasket.ru/vol3718/part371806/371806919/images/big/1.webp"
-                         alt=""
-                         class="thumb thumb-active">
-                    <img src="https://basket-22.wbbasket.ru/vol3718/part371806/371806919/images/big/2.webp"
-                         alt=""
-                         class="thumb">
-                    <img src="https://basket-22.wbbasket.ru/vol3718/part371806/371806919/images/big/3.webp"
-                         alt=""
-                         class="thumb">
-                </div>
-            </div>
-
-            <div class="item-content">
-                <h3>Напольный шкаф пенал узкий</h3>
-                <p>Узкий пенал, три варианта ракурсов</p>
-                <span class="price">4 771 ₽</span>
-                <button class="add-btn">В корзину</button>
-            </div>
+          <div class="thumbs">
+            <img
+              src="https://basket-22.wbbasket.ru/vol3718/part371806/371806919/images/big/1.webp"
+              alt="Узкий пенал, три ракурса"
+              class="thumb thumb-active"
+            />
+            <img
+              src="https://basket-22.wbbasket.ru/vol3718/part371806/371806919/images/big/2.webp"
+              alt="Узкий пенал, ракурс 2"
+              class="thumb"
+            />
+            <img
+              src="https://basket-22.wbbasket.ru/vol3718/part371806/371806919/images/big/3.webp"
+              alt="Узкий пенал, ракурс 3"
+              class="thumb"
+            />
+          </div>
         </div>
 
-        <!-- ТОВАР 5 -->
-        <div class="item"
-             data-id="5"
-             data-name="Напольный шкаф пенал узкий"
-             data-price="4713"
-             data-desc="Узкий пенал, модель №2"
-             data-images='[
-                "https://basket-22.wbbasket.ru/vol3736/part373616/373616283/images/big/1.webp",
-                "https://basket-22.wbbasket.ru/vol3736/part373616/373616283/images/big/2.webp",
-                "https://basket-22.wbbasket.ru/vol3736/part373616/373616283/images/big/3.webp"
-             ]'>
+        <div class="item-content">
+          <h3>Узкий пенал, три варианта ракурсов</h3>
+          <p>Узкий пенал, три варианта ракурсов.</p>
+          <span class="price">4 771 ₽</span>
+          <button class="add-btn">В корзину</button>
+        </div>
+      </div>
 
-            <div class="item-gallery">
-                <img src="https://basket-22.wbbasket.ru/vol3736/part373616/373616283/images/big/1.webp"
-                     alt="Напольный шкаф пенал узкий"
-                     class="item-img active js-open-lightbox">
-                <img src="https://basket-22.wbbasket.ru/vol3736/part373616/373616283/images/big/2.webp"
-                     alt="Напольный шкаф пенал узкий"
-                     class="item-img js-open-lightbox">
-                <img src="https://basket-22.wbbasket.ru/vol3736/part373616/373616283/images/big/3.webp"
-                     alt="Напольный шкаф пенал узкий"
-                     class="item-img js-open-lightbox">
+      <!-- Товар 5 -->
+      <div
+        class="item"
+        data-id="5"
+        data-name="Узкий пенал, модель №2"
+        data-price="4713"
+        data-desc="Узкий пенал, модель №2"
+        data-images='[
+          "https://basket-22.wbbasket.ru/vol3736/part373616/373616283/images/big/1.webp",
+          "https://basket-22.wbbasket.ru/vol3736/part373616/373616283/images/big/2.webp",
+          "https://basket-22.wbbasket.ru/vol3736/part373616/373616283/images/big/3.webp"
+        ]'
+      >
+        <div class="item-gallery">
+          <img
+            src="https://basket-22.wbbasket.ru/vol3736/part373616/373616283/images/big/1.webp"
+            alt="Узкий пенал, модель №2"
+            class="item-img active js-open-lightbox"
+          />
+          <img
+            src="https://basket-22.wbbasket.ru/vol3736/part373616/373616283/images/big/2.webp"
+            alt="Узкий пенал, модель №2 — ракурс 2"
+            class="item-img js-open-lightbox"
+          />
+          <img
+            src="https://basket-22.wbbasket.ru/vol3736/part373616/373616283/images/big/3.webp"
+            alt="Узкий пенал, модель №2 — ракурс 3"
+            class="item-img js-open-lightbox"
+          />
 
-                <div class="thumbs">
-                    <img src="https://basket-22.wbbasket.ru/vol3736/part373616/373616283/images/big/1.webp"
-                         alt=""
-                         class="thumb thumb-active">
-                    <img src="https://basket-22.wbbasket.ru/vol3736/part373616/373616283/images/big/2.webp"
-                         alt=""
-                         class="thumb">
-                    <img src="https://basket-22.wbbasket.ru/vol3736/part373616/373616283/images/big/3.webp"
-                         alt=""
-                         class="thumb">
-                </div>
-            </div>
-
-            <div class="item-content">
-                <h3>Напольный шкаф пенал узкий</h3>
-                <p>Узкий пенал, модель №2</p>
-                <span class="price">4 713 ₽</span>
-                <button class="add-btn">В корзину</button>
-            </div>
+          <div class="thumbs">
+            <img
+              src="https://basket-22.wbbasket.ru/vol3736/part373616/373616283/images/big/1.webp"
+              alt="Узкий пенал, модель №2"
+              class="thumb thumb-active"
+            />
+            <img
+              src="https://basket-22.wbbasket.ru/vol3736/part373616/373616283/images/big/2.webp"
+              alt="Узкий пенал, модель №2 — ракурс 2"
+              class="thumb"
+            />
+            <img
+              src="https://basket-22.wbbasket.ru/vol3736/part373616/373616283/images/big/3.webp"
+              alt="Узкий пенал, модель №2 — ракурс 3"
+              class="thumb"
+            />
+          </div>
         </div>
 
+        <div class="item-content">
+          <h3>Узкий пенал, модель №2</h3>
+          <p>Узкий пенал, модель №2.</p>
+          <span class="price">4 713 ₽</span>
+          <button class="add-btn">В корзину</button>
+        </div>
+      </div>
     </div>
 
     <div class="cart">
-        Товаров в корзине: <span id="cart-count">0</span><br>
-        На сумму: <span id="cart-total">0</span> ₽
+      <span>Товаров в корзине: <span id="cart-count">0</span></span><br />
+      <span>Итого: <span id="cart-total">0</span> ₽</span>
     </div>
+  </div>
 
-</div>
-
-<!-- Лайтбокс -->
-<div id="lightbox" class="lightbox">
+  <!-- Лайтбокс -->
+  <div id="lightbox" class="lightbox">
     <div class="lightbox-backdrop"></div>
     <div class="lightbox-content">
-        <button class="lightbox-close">&times;</button>
-        <button class="lightbox-prev">&#10094;</button>
-        <img src="" alt="" class="lightbox-image">
-        <button class="lightbox-next">&#10095;</button>
+      <button class="lightbox-close">&times;</button>
+      <button class="lightbox-prev">&#10094;</button>
+      <img src="" alt="" class="lightbox-image" />
+      <button class="lightbox-next">&#10095;</button>
     </div>
-</div>
+  </div>
 
-<!-- Модалка количества -->
-<div class="qty-modal" id="qty-modal">
+  <!-- Модалка количества -->
+  <div class="qty-modal" id="qty-modal">
     <div class="modal-backdrop"></div>
     <div class="modal-content">
-        <h3 class="modal-title" id="qty-title">Добавить в корзину</h3>
-        <div class="qty-controls">
-            <button class="qty-btn" id="qty-minus">−</button>
-            <span class="qty-value" id="qty-value">1</span>
-            <button class="qty-btn" id="qty-plus">+</button>
-        </div>
-        <div class="modal-actions">
-            <button class="modal-btn secondary" id="qty-cancel">Отмена</button>
-            <button class="modal-btn primary" id="qty-ok">Добавить</button>
-        </div>
+      <h3 class="modal-title" id="qty-title">Добавить в корзину</h3>
+      <div class="qty-controls">
+        <button class="qty-btn" id="qty-minus">−</button>
+        <span class="qty-value" id="qty-value">1</span>
+        <button class="qty-btn" id="qty-plus">+</button>
+      </div>
+      <div class="modal-actions">
+        <button class="modal-btn secondary" id="qty-cancel">Отмена</button>
+        <button class="modal-btn primary" id="qty-ok">Добавить</button>
+      </div>
     </div>
-</div>
+  </div>
 
-<!-- Модалка корзины -->
-<div class="cart-modal" id="cart-modal">
+  <!-- Модалка корзины -->
+  <div class="cart-modal" id="cart-modal">
     <div class="modal-backdrop"></div>
     <div class="modal-content">
-        <h3 class="modal-title">Корзина</h3>
-        <div id="cart-items"></div>
-        <p>Итого: <span id="cart-total-modal">0</span> ₽</p>
-        <div class="modal-actions">
-            <button class="modal-btn secondary" id="cart-close">Закрыть</button>
-            <button class="modal-btn primary" id="cart-checkout">Оформить</button>
-        </div>
+      <h3 class="modal-title">Корзина</h3>
+      <div id="cart-items"></div>
+      <p>
+        Итого:
+        <span id="cart-total-modal">0</span>
+        ₽
+      </p>
+      <div class="modal-actions">
+        <button class="modal-btn secondary" id="cart-close">Закрыть</button>
+        <button class="modal-btn primary" id="cart-checkout">Оформить заказ</button>
+      </div>
     </div>
-</div>
+  </div>
 
-<!-- Модалка данных доставки -->
-<div class="cart-modal" id="shipping-modal">
-    <div class="modal-backdrop"></div>
-    <div class="modal-content">
-        <h3 class="modal-title">Данные доставки</h3>
-
-        <div class="form-field">
-            <label for="ship-name">Имя</label>
-            <input id="ship-name" type="text" placeholder="Как к вам обращаться">
-        </div>
-
-        <div class="form-field">
-            <label for="ship-phone">Телефон</label>
-            <input id="ship-phone" type="tel" placeholder="+7...">
-        </div>
-
-        <div class="form-field">
-            <label for="ship-address">Адрес доставки</label>
-            <textarea id="ship-address" rows="3" placeholder="Город, улица, дом, подъезд..."></textarea>
-        </div>
-
-        <div class="modal-actions">
-            <button class="modal-btn secondary" id="ship-cancel">Отмена</button>
-            <button class="modal-btn primary" id="ship-ok">Далее к оплате</button>
-        </div>
-    </div>
-</div>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
