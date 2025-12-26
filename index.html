@@ -13,19 +13,45 @@
     <h2>Мебельный магазин</h2>
 
     <div class="catalog">
-        <div class="item" data-id="1" data-name="Диван угловой" data-price="15000">
-            <h3>Диван угловой</h3>
-            <p>2.5 м, ткань</p>
-            <span>15 000 ₽</span>
+
+        <!-- Напольная тумба узкая, шкаф пенал -->
+        <div class="item"
+             data-id="1"
+             data-name="Напольная тумба узкая, шкаф пенал"
+             data-price="1589">
+            <div class="item-gallery">
+                <img src="https://basket-10.wbbasket.ru/vol1524/part152456/152456703/images/big/1.webp"
+                     alt="Напольная тумба узкая, шкаф пенал"
+                     class="item-img active">
+                <img src="https://basket-10.wbbasket.ru/vol1524/part152456/152456703/images/big/3.webp"
+                     alt="Напольная тумба узкая, шкаф пенал вид 2"
+                     class="item-img">
+            </div>
+
+            <div class="thumbs">
+                <img src="https://basket-10.wbbasket.ru/vol1524/part152456/152456703/images/big/1.webp"
+                     alt=""
+                     class="thumb thumb-active">
+                <img src="https://basket-10.wbbasket.ru/vol1524/part152456/152456703/images/big/3.webp"
+                     alt=""
+                     class="thumb">
+            </div>
+
+            <h3>Напольная тумба узкая, шкаф пенал</h3>
+            <p>Узкий напольный шкаф‑пенал, идеален для небольших помещений</p>
+            <span class="price">1 589 ₽</span>
             <button class="add-btn">В корзину</button>
         </div>
 
+        <!-- Старые товары можно временно закомментировать или удалить
         <div class="item" data-id="2" data-name="Стол обеденный" data-price="8000">
             <h3>Стол обеденный</h3>
             <p>120×80, дуб</p>
             <span>8 000 ₽</span>
             <button class="add-btn">В корзину</button>
         </div>
+        -->
+
     </div>
 
     <div class="cart">
@@ -37,5 +63,21 @@
 </div>
 
 <script src="script.js"></script>
+<script>
+    // простое переключение фото по миниатюрам
+    document.querySelectorAll('.item').forEach(item => {
+        const imgs = item.querySelectorAll('.item-img');
+        const thumbs = item.querySelectorAll('.thumb');
+
+        thumbs.forEach((thumb, index) => {
+            thumb.addEventListener('click', () => {
+                imgs.forEach(img => img.classList.remove('active'));
+                thumbs.forEach(t => t.classList.remove('thumb-active'));
+                imgs[index].classList.add('active');
+                thumbs[index].classList.add('thumb-active');
+            });
+        });
+    });
+</script>
 </body>
 </html>
