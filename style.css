@@ -57,7 +57,7 @@ body {
 
 /* Карточка товара — почти прозрачное стекло (около 95%) */
 .item {
-  background: rgba(255, 255, 255, 0.05); /* 5% белого = 95% просвечивания */
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 24px;
   padding: 14px;
   display: flex;
@@ -274,16 +274,18 @@ body {
   background: rgba(0, 0, 0, 0.55);
 }
 
-/* Общая карточка модалки */
+/* Общая карточка модалок */
 .modal-content {
   position: relative;
-  background: #111827;
-  color: #f9fafb;
+  /* фон корзины в стиле сайта */
+  background:
+    radial-gradient(circle at 0% 0%, #ffffff 0, #fff7ee 35%, #fbeee1 60%, #f3f4f6 100%);
+  color: #111827;
   border-radius: 22px;
   padding: 18px 18px 16px;
   min-width: 260px;
   max-width: 380px;
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.6);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.4);
 }
 
 .modal-title {
@@ -328,17 +330,35 @@ body {
 .cart-empty {
   margin: 8px 0 4px;
   font-size: 14px;
-  color: #9ca3af;
+  color: #6b7280;
 }
 
 .cart-row {
-  background: #020617;
+  display: flex;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.7);
   border-radius: 16px;
-  padding: 10px 10px 8px;
+  padding: 8px 10px 8px;
+  margin-bottom: 8px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.15);
+}
+
+.cart-row-left {
+  flex: 0 0 56px;
+}
+
+.cart-row-thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.cart-row-right {
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  margin-bottom: 8px;
+  gap: 4px;
 }
 
 .cart-row-main {
@@ -350,12 +370,12 @@ body {
 .cart-row-name {
   font-size: 14px;
   font-weight: 500;
-  color: #f9fafb;
+  color: #111827;
 }
 
 .cart-row-price {
   font-size: 13px;
-  color: #9ca3af;
+  color: #6b7280;
 }
 
 /* Нижняя строка с количеством/итогом/удалением */
@@ -400,8 +420,8 @@ body {
   height: 26px;
   border-radius: 999px;
   border: none;
-  background: #27272f;
-  color: #f87171;
+  background: #fee2e2;
+  color: #b91c1c;
   font-size: 16px;
   cursor: pointer;
 }
