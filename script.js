@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  /* ---------- КОЛИЧЕСТВО ДОБАВЛЕНИЯ ---------- */
+  /* ---------- КОЛИЧЕСТВО (модалка добавления) ---------- */
   const qtyModal = document.getElementById("qty-modal");
   const qtyValueEl = document.getElementById("qty-value");
 
@@ -98,10 +98,12 @@ document.addEventListener("DOMContentLoaded", function () {
               <div class="cart-row-name">${i.name}</div>
               <div class="cart-row-price">${i.price} ₽ за шт.</div>
             </div>
-            <div class="cart-row-controls">
-              <button class="cart-qty-btn cart-qty-minus">−</button>
-              <span class="cart-qty-value">${i.qty}</span>
-              <button class="cart-qty-btn cart-qty-plus">+</button>
+            <div class="cart-row-bottom">
+              <div class="cart-row-controls">
+                <button class="cart-qty-btn cart-qty-minus">−</button>
+                <span class="cart-qty-value">${i.qty}</span>
+                <button class="cart-qty-btn cart-qty-plus">+</button>
+              </div>
               <div class="cart-row-total">${i.qty * i.price} ₽</div>
               <button class="cart-remove-btn">×</button>
             </div>
@@ -114,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const total = cart.reduce((s, i) => s + i.qty * i.price, 0);
     document.getElementById("cart-total-modal").textContent = total;
 
-    // Вешаем обработчики на +/- и удаление
+    // Обработчики на +/- и удаление
     cartItemsEl.querySelectorAll(".cart-row").forEach((row) => {
       const index = Number(row.dataset.index);
 
@@ -130,7 +132,6 @@ document.addEventListener("DOMContentLoaded", function () {
         if (item.qty > 1) {
           item.qty -= 1;
         } else {
-          // если было 1 — удаляем позицию
           cart.splice(index, 1);
         }
         updateCartViews();
@@ -241,7 +242,7 @@ function initLightbox() {
       });
     });
 
-    // Клика по миниатюрам: переключаем главное фото и активный класс
+    // Клик по миниатюрам
     const thumbs = item.querySelectorAll(".thumb");
     const bigImages = item.querySelectorAll(".item-img");
 
