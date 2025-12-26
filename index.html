@@ -18,16 +18,20 @@
         <div class="item"
              data-id="1"
              data-name="Напольная тумба узкая, шкаф пенал"
-             data-price="1589">
+             data-price="1589"
+             data-images='[
+                "https://basket-10.wbbasket.ru/vol1524/part152456/152456703/images/big/1.webp",
+                "https://basket-10.wbbasket.ru/vol1524/part152456/152456703/images/big/3.webp"
+             ]'>
 
             <!-- Левая колонка: фото + миниатюры -->
             <div class="item-gallery">
                 <img src="https://basket-10.wbbasket.ru/vol1524/part152456/152456703/images/big/1.webp"
                      alt="Напольная тумба узкая, шкаф пенал"
-                     class="item-img active">
+                     class="item-img active js-open-lightbox">
                 <img src="https://basket-10.wbbasket.ru/vol1524/part152456/152456703/images/big/3.webp"
                      alt="Напольная тумба узкая, шкаф пенал вид 2"
-                     class="item-img">
+                     class="item-img js-open-lightbox">
 
                 <div class="thumbs">
                     <img src="https://basket-10.wbbasket.ru/vol1524/part152456/152456703/images/big/1.webp"
@@ -58,6 +62,17 @@
     <button id="checkout-btn">Оформить заказ</button>
 </div>
 
+<!-- Лайтбокс: карточка по центру -->
+<div id="lightbox" class="lightbox">
+    <div class="lightbox-backdrop"></div>
+    <div class="lightbox-content">
+        <button class="lightbox-close">&times;</button>
+        <button class="lightbox-prev">&#10094;</button>
+        <img src="" alt="" class="lightbox-image">
+        <button class="lightbox-next">&#10095;</button>
+    </div>
+</div>
+
 <script src="script.js"></script>
 <script>
     // Переключение фото по миниатюрам
@@ -74,6 +89,69 @@
             });
         });
     });
+
+    // Лайтбокс: карточка по центру, стрелки и крестик
+    (function initLightbox() {
+        const lightbox = document.getElementById('lightbox');
+        const imgEl = lightbox.querySelector('.lightbox-image');
+        const btnClose = lightbox.querySelector('.lightbox-close');
+        const btnPrev = lightbox.querySelector('.lightbox-prev');
+        const btnNext = lightbox.querySelector('.lightbox-next');
+        const backdrop = lightbox.querySelector('.lightbox-backdrop');
+
+        let images = [];
+        let index = 0;
+
+        function openLightbox(imgList, startIndex) {
+            images = imgList;
+            index = startIndex || 0;
+            imgEl.src = images[index];
+            lightbox.classList.add('open');
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('open');
+        }
+
+        function show(delta) {
+            if (!images.length) return;
+            index = (index + delta + images.length) % images.length;
+            imgEl.src = images[index];
+        }
+
+        btnClose.addEventListener('click', closeLightbox);
+        backdrop.addEventListener('click', closeLightbox);
+        btnPrev.addEventListener('click', () => show(-1));
+        btnNext.addEventListener('click', () => show(1));
+
+        document.addEventListener('keydown', e => {
+            if (!lightbox.classList.contains('open')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') show(-1);
+            if (e.key === 'ArrowRight') show(1);
+        });
+
+        // клики по картинкам товара
+        document.querySelectorAll('.item').forEach(item => {
+            const imgs = item.querySelectorAll('.js-open-lightbox');
+            const data = item.getAttribute('data-images');
+            let imgList = [];
+            try {
+                imgList = data ? JSON.parse(data) : [];
+            } catch (e) {
+                imgList = [];
+            }
+            if (!imgList.length) {
+                imgList = Array.from(imgs).map(i => i.src);
+            }
+
+            imgs.forEach((imgNode, i) => {
+                imgNode.addEventListener('click', () => {
+                    openLightbox(imgList, i);
+                });
+            });
+        });
+    })();
 </script>
 </body>
 </html>
