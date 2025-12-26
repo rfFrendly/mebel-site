@@ -10,7 +10,13 @@
 </head>
 <body>
 <div class="app">
-    <h2>Мебельный магазин</h2>
+
+    <div class="header">
+        <h2>Мебельный магазин</h2>
+        <button class="cart-icon" id="open-cart">
+            🛒 <span id="cart-top-count">0</span>
+        </button>
+    </div>
 
     <div class="catalog">
 
@@ -59,7 +65,6 @@
         На сумму: <span id="cart-total">0</span> ₽
     </div>
 
-    <button id="checkout-btn">Оформить заказ</button>
 </div>
 
 <!-- Лайтбокс: карточка по центру -->
@@ -73,85 +78,37 @@
     </div>
 </div>
 
+<!-- Модалка выбора количества -->
+<div class="qty-modal" id="qty-modal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+        <h3 class="modal-title" id="qty-title">Добавить в корзину</h3>
+        <div class="qty-controls">
+            <button class="qty-btn" id="qty-minus">−</button>
+            <span class="qty-value" id="qty-value">1</span>
+            <button class="qty-btn" id="qty-plus">+</button>
+        </div>
+        <div class="modal-actions">
+            <button class="modal-btn secondary" id="qty-cancel">Отмена</button>
+            <button class="modal-btn primary" id="qty-ok">Добавить</button>
+        </div>
+    </div>
+</div>
+
+<!-- Модалка корзины -->
+<div class="cart-modal" id="cart-modal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+        <h3 class="modal-title">Корзина</h3>
+        <div id="cart-items"></div>
+        <p>Итого: <span id="cart-total-modal">0</span> ₽</p>
+        <div class="modal-actions">
+            <button class="modal-btn secondary" id="cart-close">Закрыть</button>
+            <button class="modal-btn primary" id="cart-checkout">Оформить</button>
+        </div>
+    </div>
+</div>
+
 <script src="script.js"></script>
-<script>
-    // Переключение фото по миниатюрам
-    document.querySelectorAll('.item').forEach(item => {
-        const imgs = item.querySelectorAll('.item-img');
-        const thumbs = item.querySelectorAll('.thumb');
-
-        thumbs.forEach((thumb, index) => {
-            thumb.addEventListener('click', () => {
-                imgs.forEach(img => img.classList.remove('active'));
-                thumbs.forEach(t => t.classList.remove('thumb-active'));
-                imgs[index].classList.add('active');
-                thumbs[index].classList.add('thumb-active');
-            });
-        });
-    });
-
-    // Лайтбокс: карточка по центру, стрелки и крестик
-    (function initLightbox() {
-        const lightbox = document.getElementById('lightbox');
-        const imgEl = lightbox.querySelector('.lightbox-image');
-        const btnClose = lightbox.querySelector('.lightbox-close');
-        const btnPrev = lightbox.querySelector('.lightbox-prev');
-        const btnNext = lightbox.querySelector('.lightbox-next');
-        const backdrop = lightbox.querySelector('.lightbox-backdrop');
-
-        let images = [];
-        let index = 0;
-
-        function openLightbox(imgList, startIndex) {
-            images = imgList;
-            index = startIndex || 0;
-            imgEl.src = images[index];
-            lightbox.classList.add('open');
-        }
-
-        function closeLightbox() {
-            lightbox.classList.remove('open');
-        }
-
-        function show(delta) {
-            if (!images.length) return;
-            index = (index + delta + images.length) % images.length;
-            imgEl.src = images[index];
-        }
-
-        btnClose.addEventListener('click', closeLightbox);
-        backdrop.addEventListener('click', closeLightbox);
-        btnPrev.addEventListener('click', () => show(-1));
-        btnNext.addEventListener('click', () => show(1));
-
-        document.addEventListener('keydown', e => {
-            if (!lightbox.classList.contains('open')) return;
-            if (e.key === 'Escape') closeLightbox();
-            if (e.key === 'ArrowLeft') show(-1);
-            if (e.key === 'ArrowRight') show(1);
-        });
-
-        // клики по картинкам товара
-        document.querySelectorAll('.item').forEach(item => {
-            const imgs = item.querySelectorAll('.js-open-lightbox');
-            const data = item.getAttribute('data-images');
-            let imgList = [];
-            try {
-                imgList = data ? JSON.parse(data) : [];
-            } catch (e) {
-                imgList = [];
-            }
-            if (!imgList.length) {
-                imgList = Array.from(imgs).map(i => i.src);
-            }
-
-            imgs.forEach((imgNode, i) => {
-                imgNode.addEventListener('click', () => {
-                    openLightbox(imgList, i);
-                });
-            });
-        });
-    })();
-</script>
 </body>
 </html>
