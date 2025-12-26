@@ -56,6 +56,7 @@ body {
     height: 220px;
     object-fit: cover;
     display: none;
+    cursor: pointer;
 }
 
 .item-img.active {
@@ -64,15 +65,15 @@ body {
 
 .thumbs {
     display: flex;
-    gap: 4px;
+    gap: 6px;
     margin-top: 6px;
 }
 
 .thumb {
-    width: 48px;
-    height: 48px;
+    width: 56px;
+    height: 56px;
     object-fit: cover;
-    border-radius: 6px;
+    border-radius: 8px;
     opacity: 0.5;
     cursor: pointer;
     border: 1px solid #ddd;
@@ -93,4 +94,82 @@ body {
     font-weight: 600;
     display: inline-block;
     margin-top: 4px;
+}
+
+/* ЛАЙТБОКС: карточка по центру */
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.lightbox.open {
+    display: flex;
+}
+
+.lightbox-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.lightbox-content {
+    position: relative;
+    width: 80vw;
+    max-width: 900px;
+    height: 80vh;
+    max-height: 700px;
+    background: #f5f5f5;
+    border-radius: 18px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 56px;
+    box-sizing: border-box;
+}
+
+.lightbox-image {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 12px;
+    object-fit: contain;
+}
+
+/* кнопки */
+
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+    position: absolute;
+    border: none;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    font-size: 20px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* крестик в правом верхнем углу карточки */
+.lightbox-close {
+    top: 12px;
+    right: 12px;
+}
+
+/* стрелки по бокам внутри карточки */
+.lightbox-prev {
+    left: 12px;
+}
+
+.lightbox-next {
+    right: 12px;
 }
