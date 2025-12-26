@@ -1,14 +1,17 @@
 body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  /* Фон: бело‑кремовая волна */
   background:
     radial-gradient(circle at 0% 0%, #ffffff 0, #fff7ee 35%, #fbeee1 60%, #f3f4f6 100%);
 }
 
+/* Общий контейнер */
 .app {
   padding: 16px 12px 20px;
 }
 
+/* Шапка + иконка корзины */
 .header {
   display: flex;
   align-items: center;
@@ -44,6 +47,7 @@ body {
   box-shadow: 0 8px 22px rgba(42, 157, 143, 0.45);
 }
 
+/* Каталог */
 .catalog {
   display: flex;
   flex-direction: column;
@@ -51,6 +55,7 @@ body {
   margin-bottom: 16px;
 }
 
+/* Карточка товара — почти прозрачное стекло */
 .item {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 24px;
@@ -77,6 +82,7 @@ body {
   color: #555;
 }
 
+/* Кнопка "В корзину" */
 .add-btn {
   margin-top: 6px;
   padding: 7px 12px;
@@ -96,12 +102,14 @@ body {
   box-shadow: 0 8px 22px rgba(42, 157, 143, 0.48);
 }
 
+/* Блок "итого" под каталогом */
 .cart {
   margin-top: 8px;
   font-size: 14px;
   color: #333;
 }
 
+/* Левая колонка: фото + миниатюры */
 .item-gallery {
   flex: 0 0 220px;
   max-width: 220px;
@@ -128,6 +136,7 @@ body {
   transform: scale(1.02);
 }
 
+/* Миниатюры снизу */
 .thumbs {
   display: flex;
   gap: 6px;
@@ -153,6 +162,7 @@ body {
   transform: translateY(-1px);
 }
 
+/* Правая колонка: текст */
 .item-content {
   flex: 1 1 auto;
   display: flex;
@@ -168,8 +178,7 @@ body {
   color: #1f2933;
 }
 
-/* Лайтбокс */
-
+/* ЛАЙТБОКС */
 .lightbox {
   position: fixed;
   inset: 0;
@@ -212,9 +221,10 @@ body {
   object-fit: contain;
 }
 
+/* кнопки лайтбокса */
 .lightbox-close,
-.lightbox-prev,
-.lightbox-next {
+lightbox-prev,
+lightbox-next {
   position: absolute;
   border: none;
   background: rgba(15, 23, 42, 0.65);
@@ -234,16 +244,15 @@ body {
   right: 12px;
 }
 
-.lightbox-prev {
+lightbox-prev {
   left: 12px;
 }
 
-.lightbox-next {
+lightbox-next {
   right: 12px;
 }
 
-/* Модалки */
-
+/* Модалки количества и корзины */
 .qty-modal,
 .cart-modal {
   position: fixed;
@@ -265,28 +274,37 @@ body {
   background: rgba(0, 0, 0, 0.55);
 }
 
-/* КАРТОЧКА МОДАЛКИ — ВЕРНУЛ ФОН, ЧТОБЫ ОКНО БЫЛО ВИДНО */
-
+/* Общая карточка модалок:
+   делаем её прозрачной, чтобы фон был только под капсулой */
 .modal-content {
   position: relative;
-  background:
-    radial-gradient(circle at 0% 0%, #ffffff 0, #fff7ee 35%, #fbeee1 60%, #f3f4f6 100%);
+  background: transparent;
   color: #111827;
   border-radius: 22px;
   padding: 18px 18px 16px;
   min-width: 260px;
   max-width: 380px;
+  box-shadow: none;
+}
+
+/* Дополнительный контейнер‑фон внутри модалки:
+   именно он будет «обтекать» капсулу */
+.cart-shell {
+  background:
+    radial-gradient(circle at 0% 0%, #ffffff 0, #fff7ee 35%, #fbeee1 60%, #f3f4f6 100%);
+  border-radius: 26px;
+  padding: 18px 18px 20px;
   box-shadow: 0 16px 40px rgba(15, 23, 42, 0.4);
 }
 
+/* Заголовок модалки остаётся как есть */
 .modal-title {
   margin: 0 0 12px;
   font-weight: 600;
   font-size: 16px;
 }
 
-/* Количество */
-
+/* Количество (модалка добавления) */
 .qty-controls {
   display: flex;
   align-items: center;
@@ -313,7 +331,6 @@ body {
 }
 
 /* Список в корзине */
-
 #cart-items {
   max-height: 260px;
   overflow-y: auto;
@@ -326,14 +343,14 @@ body {
   color: #6b7280;
 }
 
-/* Капсула товара */
-
+/* Капсула товара: фон прозрачный, чтобы фон‑оболочка её обтекал */
 .cart-row {
   display: flex;
-  gap: 10px;
   align-items: center;
+  gap: 10px;
   padding: 10px 18px;
   margin-bottom: 10px;
+
   background: transparent;
   border-radius: 999px;
   box-shadow:
@@ -376,6 +393,7 @@ body {
   color: #6b7280;
 }
 
+/* Нижняя строка с количеством/итогом/удалением */
 .cart-row-bottom {
   display: flex;
   align-items: center;
@@ -423,6 +441,7 @@ body {
   cursor: pointer;
 }
 
+/* Итог под списком */
 .modal-summary {
   margin-top: 4px;
   display: flex;
@@ -431,6 +450,7 @@ body {
   font-size: 14px;
 }
 
+/* Кнопки модалок */
 .modal-actions {
   display: flex;
   justify-content: flex-end;
@@ -456,6 +476,7 @@ body {
   color: #e5e7eb;
 }
 
+/* Поля формы доставки, если будут нужны позже */
 .form-field {
   margin-bottom: 10px;
   display: flex;
@@ -478,6 +499,7 @@ body {
   resize: vertical;
 }
 
+/* Адаптив под узкие экраны */
 @media (max-width: 600px) {
   .item {
     flex-direction: column;
