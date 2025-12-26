@@ -27,8 +27,16 @@ document.querySelectorAll('.add-btn').forEach(btn => {
         const id = itemEl.dataset.id;
         const name = itemEl.dataset.name;
         const price = Number(itemEl.dataset.price);
+        const desc = itemEl.dataset.desc || '';
+        let images = [];
 
-        currentItem = { id, name, price };
+        try {
+            images = itemEl.dataset.images ? JSON.parse(itemEl.dataset.images) : [];
+        } catch (e) {
+            images = [];
+        }
+
+        currentItem = { id, name, price, desc, images };
 
         document.getElementById('qty-title').textContent =
             `Добавить «${name}»`;
@@ -98,7 +106,6 @@ document.getElementById('cart-checkout').onclick = () => {
         alert('Корзина пуста');
         return;
     }
-    // показываем форму доставки
     document.getElementById('shipping-modal').classList.add('open');
 };
 
@@ -129,7 +136,7 @@ document.getElementById('ship-ok').onclick = () => {
         customer: { name, phone, address }
     };
 
-    tg.sendData(JSON.stringify(payload)); [web:57][web:252]
+    tg.sendData(JSON.stringify(payload)); [web:57]
     tg.close();
 };
 
