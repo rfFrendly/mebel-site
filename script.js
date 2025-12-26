@@ -91,17 +91,45 @@ function renderCartModal() {
     document.getElementById('cart-total-modal').textContent = total;
 }
 
+/* ---------- ПЕРЕХОД К ФОРМЕ ДОСТАВКИ ---------- */
+
 document.getElementById('cart-checkout').onclick = () => {
     if (!cart.length) {
         alert('Корзина пуста');
         return;
     }
+    // показываем форму доставки
+    document.getElementById('shipping-modal').classList.add('open');
+};
 
-    tg.sendData(JSON.stringify({
+/* ---------- ФОРМА ДОСТАВКИ ---------- */
+
+const shippingModal = document.getElementById('shipping-modal');
+const shipName = document.getElementById('ship-name');
+const shipPhone = document.getElementById('ship-phone');
+const shipAddress = document.getElementById('ship-address');
+
+document.getElementById('ship-cancel').onclick = () => {
+    shippingModal.classList.remove('open');
+};
+
+document.getElementById('ship-ok').onclick = () => {
+    const name = shipName.value.trim();
+    const phone = shipPhone.value.trim();
+    const address = shipAddress.value.trim();
+
+    if (!name || !phone || !address) {
+        alert('Пожалуйста, заполните все поля');
+        return;
+    }
+
+    const payload = {
         cart: cart,
-        total: cart.reduce((s, i) => s + i.qty * i.price, 0)
-    }));
+        total: cart.reduce((s, i) => s + i.qty * i.price, 0),
+        customer: { name, phone, address }
+    };
 
+    tg.sendData(JSON.stringify(payload)); [web:57][web:252]
     tg.close();
 };
 
@@ -147,7 +175,6 @@ document.getElementById('cart-checkout').onclick = () => {
         if (e.key === 'ArrowRight') show(1);
     });
 
-    // навешиваем клики на картинки товаров
     document.querySelectorAll('.item').forEach(item => {
         const imgs = item.querySelectorAll('.js-open-lightbox');
         const data = item.getAttribute('data-images');
