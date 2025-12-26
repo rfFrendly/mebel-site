@@ -23,7 +23,6 @@ function updateCartViews() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  /* КНОПКА "В корзину" */
   document.querySelectorAll(".add-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const itemEl = btn.closest(".item");
@@ -45,7 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /* Модалка количества */
   const qtyModal = document.getElementById("qty-modal");
   const qtyValueEl = document.getElementById("qty-value");
 
@@ -72,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCartViews();
   };
 
-  /* Модалка корзины */
   const cartModal = document.getElementById("cart-modal");
   const cartItemsEl = document.getElementById("cart-items");
 
@@ -100,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="cart-row-left">
               ${
                 thumb
-                  ? `<img src="${thumb}" class="cart-row-thumb" alt="" />`
+                  ? `<img src="${thumb}" class="cart-row-thumb" alt="">`
                   : ""
               }
             </div>
@@ -150,7 +147,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* Лайтбокс для галерей */
   const lightbox = document.getElementById("lightbox");
   const lightboxImage = document.getElementById("lightbox-image");
   const lightboxClose = document.getElementById("lightbox-close");
