@@ -333,15 +333,20 @@ body {
   color: #6b7280;
 }
 
-/* ВАЖНО: делаем блок товара «плавающим» на общем градиенте */
+/* Блок товара в корзине — заметная капсула */
 .cart-row {
   display: flex;
   gap: 10px;
-  background: rgba(255, 255, 255, 0.12); /* лёгкая вуаль, не сплошной прямоугольник */
-  border-radius: 999px;                   /* мягкое обтекание товара */
-  padding: 8px 12px;
-  margin-bottom: 10px;
   align-items: center;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+
+  /* более плотная, но мягкая подложка */
+  background: radial-gradient(circle at top left, #ffffffee 0%, #fff5e6ee 60%, #f3f4f6ee 100%);
+  border-radius: 999px;
+  box-shadow:
+    0 8px 20px rgba(15, 23, 42, 0.12),
+    0 0 0 1px rgba(255, 255, 255, 0.6);
 }
 
 .cart-row-left {
@@ -351,7 +356,7 @@ body {
 .cart-row-thumb {
   width: 56px;
   height: 56px;
-  border-radius: 16px;
+  border-radius: 18px;
   object-fit: cover;
 }
 
