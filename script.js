@@ -1,6 +1,8 @@
-const tg = window.Telegram.WebApp;
-tg.ready();
-tg.expand(); // во весь экран
+const tg = window.Telegram ? window.Telegram.WebApp : null;
+if (tg) {
+  tg.ready();
+  tg.expand();
+}
 
 let cart = [];
 let currentItem = null;
@@ -12,15 +14,16 @@ function updateCartViews() {
   const countSpan = document.getElementById("cart-count");
   const totalSpan = document.getElementById("cart-total");
   const topCount = document.getElementById("cart-top-count");
+  const modalTotal = document.getElementById("cart-modal-total");
 
   if (countSpan) countSpan.textContent = count;
-  if (totalSpan) totalSpan.textContent = total;
   if (topCount) topCount.textContent = count;
+  if (totalSpan) totalSpan.textContent = total;
+  if (modalTotal) modalTotal.textContent = total;
 }
 
-// Ждем загрузку DOM
-document.addEventListener("DOMContentLoaded", function () {
-  /* ---------- КНОПКА "В КОРЗИНУ" + ВЫБОР КОЛИЧЕСТВА ---------- */
+document.addEventListener("DOMContentLoaded", () => {
+  /* КНОПКА "В корзину" */
   document.querySelectorAll(".add-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const itemEl = btn.closest(".item");
@@ -28,23 +31,21 @@ document.addEventListener("DOMContentLoaded", function () {
       const name = itemEl.dataset.name;
       const price = Number(itemEl.dataset.price);
       const desc = itemEl.dataset.desc || "";
-
       let images = [];
       try {
         images = itemEl.dataset.images ? JSON.parse(itemEl.dataset.images) : [];
-      } catch (e) {
+      } catch {
         images = [];
       }
 
       currentItem = { id, name, price, desc, images };
-
       document.getElementById("qty-title").textContent = `Добавить «${name}»`;
       document.getElementById("qty-value").textContent = "1";
       document.getElementById("qty-modal").classList.add("open");
     });
   });
 
-  /* ---------- КОЛИЧЕСТВО (модалка добавления) ---------- */
+  /* Модалка количества */
   const qtyModal = document.getElementById("qty-modal");
   const qtyValueEl = document.getElementById("qty-value");
 
@@ -64,16 +65,14 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("qty-ok").onclick = () => {
     const qty = Number(qtyValueEl.textContent) || 1;
     if (!currentItem) return;
-
     const existing = cart.find((i) => i.id === currentItem.id);
     if (existing) existing.qty += qty;
     else cart.push({ ...currentItem, qty });
-
     qtyModal.classList.remove("open");
     updateCartViews();
   };
 
-  /* ---------- МОДАЛКА КОРЗИНЫ ---------- */
+  /* Модалка корзины */
   const cartModal = document.getElementById("cart-modal");
   const cartItemsEl = document.getElementById("cart-items");
 
@@ -88,123 +87,107 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function renderCartModal() {
     if (!cart.length) {
-      cartItemsEl.innerHTML = `<p class="cart-empty">Корзина пуста</p>`;
-    } else {
-      cartItemsEl.innerHTML = cart
-        .map((i, idx) => {
-          const thumb = i.images && i.images.length ? i.images[0] : "";
-          return `
+      cartItemsEl.innerHTML = `<div class="cart-empty">Корзина пуста</div>`;
+      updateCartViews();
+      return;
+    }
+
+    cartItemsEl.innerHTML = cart
+      .map((i, idx) => {
+        const thumb = i.images && i.images.length ? i.images[0] : "";
+        return `
           <div class="cart-row" data-index="${idx}">
             <div class="cart-row-left">
               ${
                 thumb
-                  ? `<img class="cart-row-thumb" src="${thumb}" alt="${i.name}">`
+                  ? `<img src="${thumb}" class="cart-row-thumb" alt="" />`
                   : ""
               }
             </div>
             <div class="cart-row-right">
               <div class="cart-row-main">
-                <div class="cart-row-name">${i.name}</div>
-                <div class="cart-row-price">${i.price} ₽ за шт.</div>
+                <span class="cart-row-name">${i.name}</span>
+                <span class="cart-row-price">${i.price} ₽ за шт.</span>
               </div>
               <div class="cart-row-bottom">
                 <div class="cart-row-controls">
-                  <button class="cart-qty-btn cart-qty-minus">−</button>
+                  <button class="cart-qty-btn cart-minus">−</button>
                   <span class="cart-qty-value">${i.qty}</span>
-                  <button class="cart-qty-btn cart-qty-plus">+</button>
+                  <button class="cart-qty-btn cart-plus">+</button>
                 </div>
-                <div class="cart-row-total">${i.qty * i.price} ₽</div>
+                <span class="cart-row-total">${i.qty * i.price} ₽</span>
                 <button class="cart-remove-btn">×</button>
               </div>
             </div>
           </div>
         `;
-        })
-        .join("");
-    }
+      })
+      .join("");
 
-    const total = cart.reduce((s, i) => s + i.qty * i.price, 0);
-    document.getElementById("cart-total-modal").textContent = total;
+    attachCartRowHandlers();
+    updateCartViews();
+  }
 
-    // Обработчики на +/- и удаление
-    cartItemsEl.querySelectorAll(".cart-row").forEach((row) => {
+  function attachCartRowHandlers() {
+    document.querySelectorAll(".cart-row").forEach((row) => {
       const index = Number(row.dataset.index);
 
-      const minusBtn = row.querySelector(".cart-qty-minus");
-      const plusBtn = row.querySelector(".cart-qty-plus");
-      const removeBtn = row.querySelector(".cart-remove-btn");
-      const qtyEl = row.querySelector(".cart-qty-value");
-      const rowTotalEl = row.querySelector(".cart-row-total");
-
-      minusBtn.onclick = () => {
-        const item = cart[index];
-        if (!item) return;
-        if (item.qty > 1) {
-          item.qty -= 1;
-        } else {
-          cart.splice(index, 1);
-        }
-        updateCartViews();
+      row.querySelector(".cart-minus").onclick = () => {
+        if (cart[index].qty > 1) cart[index].qty -= 1;
+        else cart.splice(index, 1);
         renderCartModal();
       };
 
-      plusBtn.onclick = () => {
-        const item = cart[index];
-        if (!item) return;
-        item.qty += 1;
-        qtyEl.textContent = item.qty;
-        rowTotalEl.textContent = `${item.qty * item.price} ₽`;
-        const newTotal = cart.reduce((s, i) => s + i.qty * i.price, 0);
-        document.getElementById("cart-total-modal").textContent = newTotal;
-        updateCartViews();
+      row.querySelector(".cart-plus").onclick = () => {
+        cart[index].qty += 1;
+        renderCartModal();
       };
 
-      removeBtn.onclick = () => {
+      row.querySelector(".cart-remove-btn").onclick = () => {
         cart.splice(index, 1);
-        updateCartViews();
         renderCartModal();
       };
     });
   }
 
-  document.getElementById("cart-checkout").onclick = () => {
-    if (!cart.length) {
-      alert("Сначала добавьте товары в корзину.");
-      return;
-    }
-
-    tg.sendData(
-      JSON.stringify({
-        cart,
-        total: cart.reduce((s, i) => s + i.qty * i.price, 0),
-      })
-    );
-    tg.close();
-  };
-
-  /* ---------- ЛАЙТБОКС ---------- */
-  initLightbox();
-});
-
-/* Инициализация лайтбокса */
-function initLightbox() {
+  /* Лайтбокс для галерей */
   const lightbox = document.getElementById("lightbox");
-  const imgEl = lightbox.querySelector(".lightbox-image");
-  const btnClose = lightbox.querySelector(".lightbox-close");
-  const btnPrev = lightbox.querySelector(".lightbox-prev");
-  const btnNext = lightbox.querySelector(".lightbox-next");
-  const backdrop = lightbox.querySelector(".lightbox-backdrop");
+  const lightboxImage = document.getElementById("lightbox-image");
+  const lightboxClose = document.getElementById("lightbox-close");
+  const lightboxPrev = document.getElementById("lightbox-prev");
+  const lightboxNext = document.getElementById("lightbox-next");
 
-  let images = [];
-  let index = 0;
+  let currentGallery = [];
+  let currentIndex = 0;
 
-  function openLightbox(imgList, startIndex) {
-    images = imgList;
-    index = startIndex || 0;
+  document.querySelectorAll(".item-gallery").forEach((galleryEl) => {
+    const parentItem = galleryEl.closest(".item");
+    const images = JSON.parse(parentItem.dataset.images || "[]");
+    const imgs = galleryEl.querySelectorAll(".item-img");
+    const thumbs = galleryEl.querySelectorAll(".thumb");
 
-    if (!images.length) return;
+    imgs.forEach((imgEl) => {
+      imgEl.addEventListener("click", () => {
+        currentGallery = images;
+        currentIndex = Number(imgEl.dataset.index);
+        openLightbox();
+      });
+    });
 
-    imgEl.src = images[index];
+    thumbs.forEach((thumbEl) => {
+      thumbEl.addEventListener("click", () => {
+        const idx = Number(thumbEl.dataset.index);
+        imgs.forEach((im) => im.classList.remove("active"));
+        thumbs.forEach((t) => t.classList.remove("thumb-active"));
+        imgs[idx].classList.add("active");
+        thumbEl.classList.add("thumb-active");
+      });
+    });
+  });
+
+  function openLightbox() {
+    if (!currentGallery.length) return;
+    lightboxImage.src = currentGallery[currentIndex];
     lightbox.classList.add("open");
   }
 
@@ -212,58 +195,20 @@ function initLightbox() {
     lightbox.classList.remove("open");
   }
 
-  function show(delta) {
-    if (!images.length) return;
-    index = (index + delta + images.length) % images.length;
-    imgEl.src = images[index];
+  function showPrev() {
+    if (!currentGallery.length) return;
+    currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+    lightboxImage.src = currentGallery[currentIndex];
   }
 
-  btnClose.addEventListener("click", closeLightbox);
-  backdrop.addEventListener("click", closeLightbox);
-  btnPrev.addEventListener("click", () => show(-1));
-  btnNext.addEventListener("click", () => show(1));
+  function showNext() {
+    if (!currentGallery.length) return;
+    currentIndex = (currentIndex + 1) % currentGallery.length;
+    lightboxImage.src = currentGallery[currentIndex];
+  }
 
-  document.addEventListener("keydown", (e) => {
-    if (!lightbox.classList.contains("open")) return;
-    if (e.key === "Escape") closeLightbox();
-    if (e.key === "ArrowLeft") show(-1);
-    if (e.key === "ArrowRight") show(1);
-  });
-
-  // Привязка к картинкам и data-images
-  document.querySelectorAll(".item").forEach((item) => {
-    const imgsNodes = item.querySelectorAll(".js-open-lightbox");
-    const data = item.getAttribute("data-images");
-
-    let imgList = [];
-    try {
-      imgList = data ? JSON.parse(data) : [];
-    } catch (e) {
-      imgList = [];
-    }
-
-    if (!imgList.length) {
-      imgList = Array.from(imgsNodes).map((i) => i.src);
-    }
-
-    imgsNodes.forEach((imgNode, i) => {
-      imgNode.addEventListener("click", () => {
-        openLightbox(imgList, i);
-      });
-    });
-
-    // Клик по миниатюрам
-    const thumbs = item.querySelectorAll(".thumb");
-    const bigImages = item.querySelectorAll(".item-img");
-
-    thumbs.forEach((thumb, idx) => {
-      thumb.addEventListener("click", () => {
-        bigImages.forEach((bi) => bi.classList.remove("active"));
-        thumbs.forEach((t) => t.classList.remove("thumb-active"));
-
-        if (bigImages[idx]) bigImages[idx].classList.add("active");
-        thumb.classList.add("thumb-active");
-      });
-    });
-  });
-}
+  lightboxClose.onclick = closeLightbox;
+  lightboxPrev.onclick = showPrev;
+  lightboxNext.onclick = showNext;
+  lightbox.querySelector(".lightbox-backdrop").onclick = closeLightbox;
+});
