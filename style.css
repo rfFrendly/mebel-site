@@ -52,9 +52,9 @@ body {
 }
 
 .item-img {
-    width: 100%;
-    height: 260px;
-    object-fit: cover;
+    width: 100% !important;
+    height: 260px !important;
+    object-fit: cover !important;
     display: none;
 }
 
