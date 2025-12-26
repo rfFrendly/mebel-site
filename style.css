@@ -244,7 +244,7 @@ lightbox-next {
   right: 12px;
 }
 
-.lightbox-prev {
+lightbox-prev {
   left: 12px;
 }
 
@@ -335,16 +335,16 @@ lightbox-next {
 
 /* Блок товара в корзине — белая капсула поверх градиента */
 .cart-row {
-  display: flex;
-  gap: 10px;
+  display: inline-flex;      /* важно: капсула по своей ширине, градиент вокруг */
   align-items: center;
+  gap: 10px;
   padding: 10px 18px;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 
-  background: #ffffff; /* плотный белый фон капсулы */
+  background: #ffffff;
   border-radius: 999px;
   box-shadow:
-    0 10px 28px rgba(15, 23, 42, 0.22); /* выраженная мягкая тень вниз */
+    0 12px 30px rgba(15, 23, 42, 0.26);
 }
 
 .cart-row-left {
