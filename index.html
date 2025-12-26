@@ -5,7 +5,7 @@
     <title>Магазин мебели</title>
 
     <!-- Скрипт Telegram Mini Apps -->
-    <script src="https://telegram.org/js/telegram-web-app.js"></script> <!-- важно -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,6 +19,7 @@
              data-id="1"
              data-name="Напольная тумба узкая, шкаф пенал"
              data-price="1589">
+
             <div class="item-gallery">
                 <img src="https://basket-10.wbbasket.ru/vol1524/part152456/152456703/images/big/1.webp"
                      alt="Напольная тумба узкая, шкаф пенал"
@@ -43,15 +44,6 @@
             <button class="add-btn">В корзину</button>
         </div>
 
-        <!-- Старые товары можно временно закомментировать или удалить
-        <div class="item" data-id="2" data-name="Стол обеденный" data-price="8000">
-            <h3>Стол обеденный</h3>
-            <p>120×80, дуб</p>
-            <span>8 000 ₽</span>
-            <button class="add-btn">В корзину</button>
-        </div>
-        -->
-
     </div>
 
     <div class="cart">
@@ -64,7 +56,7 @@
 
 <script src="script.js"></script>
 <script>
-    // простое переключение фото по миниатюрам
+    // Переключение фото по миниатюрам
     document.querySelectorAll('.item').forEach(item => {
         const imgs = item.querySelectorAll('.item-img');
         const thumbs = item.querySelectorAll('.thumb');
