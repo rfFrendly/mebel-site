@@ -223,8 +223,8 @@ body {
 
 /* кнопки лайтбокса */
 .lightbox-close,
-lightbox-prev,
-lightbox-next {
+.lightbox-prev,
+.lightbox-next {
   position: absolute;
   border: none;
   background: rgba(15, 23, 42, 0.65);
@@ -244,11 +244,11 @@ lightbox-next {
   right: 12px;
 }
 
-lightbox-prev {
+.lightbox-prev {
   left: 12px;
 }
 
-lightbox-next {
+.lightbox-next {
   right: 12px;
 }
 
@@ -275,7 +275,7 @@ lightbox-next {
 }
 
 /* Общая карточка модалок:
-   делаем её прозрачной, чтобы фон был только под капсулой */
+   делаем её прозрачной, фон в .cart-shell */
 .modal-content {
   position: relative;
   background: transparent;
@@ -287,8 +287,7 @@ lightbox-next {
   box-shadow: none;
 }
 
-/* Дополнительный контейнер‑фон внутри модалки:
-   именно он будет «обтекать» капсулу */
+/* Контейнер, который фон обтекает капсулу */
 .cart-shell {
   background:
     radial-gradient(circle at 0% 0%, #ffffff 0, #fff7ee 35%, #fbeee1 60%, #f3f4f6 100%);
@@ -297,7 +296,7 @@ lightbox-next {
   box-shadow: 0 16px 40px rgba(15, 23, 42, 0.4);
 }
 
-/* Заголовок модалки остаётся как есть */
+/* Заголовок модалки */
 .modal-title {
   margin: 0 0 12px;
   font-weight: 600;
@@ -343,14 +342,13 @@ lightbox-next {
   color: #6b7280;
 }
 
-/* Капсула товара: фон прозрачный, чтобы фон‑оболочка её обтекал */
+/* Капсула товара – прозрачная, фон обтекает */
 .cart-row {
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 10px 18px;
   margin-bottom: 10px;
-
   background: transparent;
   border-radius: 999px;
   box-shadow:
