@@ -274,20 +274,30 @@ lightbox-next {
   background: rgba(0, 0, 0, 0.55);
 }
 
-/* Общая карточка модалок */
+/* Общая карточка модалок:
+   делаем её прозрачной, чтобы фон был только под капсулой */
 .modal-content {
   position: relative;
-  /* фон корзины в стиле сайта */
-  background:
-    radial-gradient(circle at 0% 0%, #ffffff 0, #fff7ee 35%, #fbeee1 60%, #f3f4f6 100%);
+  background: transparent;
   color: #111827;
   border-radius: 22px;
   padding: 18px 18px 16px;
   min-width: 260px;
   max-width: 380px;
+  box-shadow: none;
+}
+
+/* Дополнительный контейнер‑фон внутри модалки:
+   именно он будет «обтекать» капсулу */
+.cart-shell {
+  background:
+    radial-gradient(circle at 0% 0%, #ffffff 0, #fff7ee 35%, #fbeee1 60%, #f3f4f6 100%);
+  border-radius: 26px;
+  padding: 18px 18px 20px;
   box-shadow: 0 16px 40px rgba(15, 23, 42, 0.4);
 }
 
+/* Заголовок модалки остаётся как есть */
 .modal-title {
   margin: 0 0 12px;
   font-weight: 600;
@@ -333,18 +343,19 @@ lightbox-next {
   color: #6b7280;
 }
 
-/* Блок товара в корзине — белая капсула поверх градиента */
+/* Капсула товара: фон прозрачный, чтобы фон‑оболочка её обтекал */
 .cart-row {
-  display: inline-flex;      /* важно: капсула по своей ширине, градиент вокруг */
+  display: flex;
   align-items: center;
   gap: 10px;
   padding: 10px 18px;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 
-  background: #ffffff;
+  background: transparent;
   border-radius: 999px;
   box-shadow:
-    0 12px 30px rgba(15, 23, 42, 0.26);
+    0 10px 26px rgba(15, 23, 42, 0.18),
+    0 0 0 1px rgba(255, 255, 255, 0.65);
 }
 
 .cart-row-left {
