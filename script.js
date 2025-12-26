@@ -91,25 +91,35 @@ document.addEventListener("DOMContentLoaded", function () {
       cartItemsEl.innerHTML = `<p class="cart-empty">Корзина пуста</p>`;
     } else {
       cartItemsEl.innerHTML = cart
-        .map(
-          (i, idx) => `
+        .map((i, idx) => {
+          const thumb = i.images && i.images.length ? i.images[0] : "";
+          return `
           <div class="cart-row" data-index="${idx}">
-            <div class="cart-row-main">
-              <div class="cart-row-name">${i.name}</div>
-              <div class="cart-row-price">${i.price} ₽ за шт.</div>
+            <div class="cart-row-left">
+              ${
+                thumb
+                  ? `<img class="cart-row-thumb" src="${thumb}" alt="${i.name}">`
+                  : ""
+              }
             </div>
-            <div class="cart-row-bottom">
-              <div class="cart-row-controls">
-                <button class="cart-qty-btn cart-qty-minus">−</button>
-                <span class="cart-qty-value">${i.qty}</span>
-                <button class="cart-qty-btn cart-qty-plus">+</button>
+            <div class="cart-row-right">
+              <div class="cart-row-main">
+                <div class="cart-row-name">${i.name}</div>
+                <div class="cart-row-price">${i.price} ₽ за шт.</div>
               </div>
-              <div class="cart-row-total">${i.qty * i.price} ₽</div>
-              <button class="cart-remove-btn">×</button>
+              <div class="cart-row-bottom">
+                <div class="cart-row-controls">
+                  <button class="cart-qty-btn cart-qty-minus">−</button>
+                  <span class="cart-qty-value">${i.qty}</span>
+                  <button class="cart-qty-btn cart-qty-plus">+</button>
+                </div>
+                <div class="cart-row-total">${i.qty * i.price} ₽</div>
+                <button class="cart-remove-btn">×</button>
+              </div>
             </div>
           </div>
-        `
-        )
+        `;
+        })
         .join("");
     }
 
