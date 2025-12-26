@@ -280,3 +280,27 @@ body {
 .modal-btn.secondary {
     background: #e5e5e5;
 }
+
+/* Поля формы доставки */
+
+.form-field {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 14px;
+}
+
+.form-field label {
+    color: #555;
+}
+
+.form-field input,
+.form-field textarea {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 6px 8px;
+    font-family: inherit;
+    font-size: 14px;
+    resize: vertical;
+}
