@@ -19,7 +19,8 @@ function updateCartViews() {
     if (topCount) topCount.textContent = count;
 }
 
-// обработчик кнопки "В корзину" — открываем модалку количества
+/* ---------- КНОПКА "В КОРЗИНУ" + ВЫБОР КОЛИЧЕСТВА ---------- */
+
 document.querySelectorAll('.add-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         const itemEl = btn.closest('.item');
@@ -36,7 +37,6 @@ document.querySelectorAll('.add-btn').forEach(btn => {
     });
 });
 
-// модалка количества
 const qtyModal = document.getElementById('qty-modal');
 const qtyValueEl = document.getElementById('qty-value');
 
@@ -65,7 +65,8 @@ document.getElementById('qty-ok').onclick = () => {
     updateCartViews();
 };
 
-// модалка корзины
+/* ---------- МОДАЛКА КОРЗИНЫ ---------- */
+
 const cartModal = document.getElementById('cart-modal');
 const cartItemsEl = document.getElementById('cart-items');
 
@@ -82,15 +83,14 @@ function renderCartModal() {
     if (!cart.length) {
         cartItemsEl.innerHTML = '<p>Корзина пуста</p>';
     } else {
-        cartItemsEl.innerHTML = cart.map(i =>
-            `<div>${i.name} — ${i.qty} шт × ${i.price} ₽</div>`
-        ).join('');
+        cartItemsEl.innerHTML = cart
+            .map(i => `<div>${i.name} — ${i.qty} шт × ${i.price} ₽</div>`)
+            .join('');
     }
     const total = cart.reduce((s, i) => s + i.qty * i.price, 0);
     document.getElementById('cart-total-modal').textContent = total;
 }
 
-// отправка заказа в бота из корзины
 document.getElementById('cart-checkout').onclick = () => {
     if (!cart.length) {
         alert('Корзина пуста');
@@ -104,3 +104,67 @@ document.getElementById('cart-checkout').onclick = () => {
 
     tg.close();
 };
+
+/* ---------- ЛАЙТБОКС ДЛЯ ФОТО ---------- */
+
+(function initLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    const imgEl = lightbox.querySelector('.lightbox-image');
+    const btnClose = lightbox.querySelector('.lightbox-close');
+    const btnPrev = lightbox.querySelector('.lightbox-prev');
+    const btnNext = lightbox.querySelector('.lightbox-next');
+    const backdrop = lightbox.querySelector('.lightbox-backdrop');
+
+    let images = [];
+    let index = 0;
+
+    function openLightbox(imgList, startIndex) {
+        images = imgList;
+        index = startIndex || 0;
+        imgEl.src = images[index];
+        lightbox.classList.add('open');
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('open');
+    }
+
+    function show(delta) {
+        if (!images.length) return;
+        index = (index + delta + images.length) % images.length;
+        imgEl.src = images[index];
+    }
+
+    btnClose.addEventListener('click', closeLightbox);
+    backdrop.addEventListener('click', closeLightbox);
+    btnPrev.addEventListener('click', () => show(-1));
+    btnNext.addEventListener('click', () => show(1));
+
+    document.addEventListener('keydown', e => {
+        if (!lightbox.classList.contains('open')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') show(-1);
+        if (e.key === 'ArrowRight') show(1);
+    });
+
+    // навешиваем клики на картинки товаров
+    document.querySelectorAll('.item').forEach(item => {
+        const imgs = item.querySelectorAll('.js-open-lightbox');
+        const data = item.getAttribute('data-images');
+        let imgList = [];
+        try {
+            imgList = data ? JSON.parse(data) : [];
+        } catch (e) {
+            imgList = [];
+        }
+        if (!imgList.length) {
+            imgList = Array.from(imgs).map(i => i.src);
+        }
+
+        imgs.forEach((imgNode, i) => {
+            imgNode.addEventListener('click', () => {
+                openLightbox(imgList, i);
+            });
+        });
+    });
+})();
